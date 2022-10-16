@@ -1,0 +1,51 @@
+{
+    "name": "SquadInput",
+    "maps": [
+        {
+            "name": "SquadController",
+            "id": "98bc655a-168a-4216-b265-4f8c0701bb64",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "58a0d349-2941-4e05-a904-e8c352f67ffb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0f47c29e-f5bf-4a7d-8c36-aee132816efd",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard & Mouse",
+            "bindingGroup": "Keyboard & Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
