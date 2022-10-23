@@ -7,6 +7,9 @@ using System;
 
 public class Follow_Leader : MonoBehaviour
 {
+    public Squad_Controller squad_controller;
+    private Animator animator;
+
     public Moving_To_Cover mtc;
     public Moving_To_Cover mtc_y;
 
@@ -27,6 +30,7 @@ public class Follow_Leader : MonoBehaviour
     void Update()
     {
         nav_agent.SetDestination(squad_leader.position + offset);
+
         if (mtc_y.in_cover_y)
         {
             Debug.Log("In cover y");

@@ -35,6 +35,24 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Retreat"",
+                    ""type"": ""Button"",
+                    ""id"": ""ece01223-0e7e-4cc8-b582-c820b2bba3bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Suppressed"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b79c95b-fadb-481f-a628-43034a73ef79"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +64,28 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20903b1e-5820-418b-ac4d-e17c0fa9d424"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Retreat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""050cf671-cbea-4df9-9edf-8d5bcf33035c"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Suppressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -74,6 +114,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         // SquadController
         m_SquadController = asset.FindActionMap("SquadController", throwIfNotFound: true);
         m_SquadController_Move = m_SquadController.FindAction("Move", throwIfNotFound: true);
+        m_SquadController_Retreat = m_SquadController.FindAction("Retreat", throwIfNotFound: true);
+        m_SquadController_Suppressed = m_SquadController.FindAction("Suppressed", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -134,11 +176,15 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_SquadController;
     private ISquadControllerActions m_SquadControllerActionsCallbackInterface;
     private readonly InputAction m_SquadController_Move;
+    private readonly InputAction m_SquadController_Retreat;
+    private readonly InputAction m_SquadController_Suppressed;
     public struct SquadControllerActions
     {
         private @SquadInput m_Wrapper;
         public SquadControllerActions(@SquadInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_SquadController_Move;
+        public InputAction @Retreat => m_Wrapper.m_SquadController_Retreat;
+        public InputAction @Suppressed => m_Wrapper.m_SquadController_Suppressed;
         public InputActionMap Get() { return m_Wrapper.m_SquadController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -151,6 +197,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnMove;
+                @Retreat.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnRetreat;
+                @Retreat.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnRetreat;
+                @Retreat.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnRetreat;
+                @Suppressed.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
+                @Suppressed.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
+                @Suppressed.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
             }
             m_Wrapper.m_SquadControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -158,6 +210,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Retreat.started += instance.OnRetreat;
+                @Retreat.performed += instance.OnRetreat;
+                @Retreat.canceled += instance.OnRetreat;
+                @Suppressed.started += instance.OnSuppressed;
+                @Suppressed.performed += instance.OnSuppressed;
+                @Suppressed.canceled += instance.OnSuppressed;
             }
         }
     }
@@ -174,5 +232,7 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
     public interface ISquadControllerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRetreat(InputAction.CallbackContext context);
+        void OnSuppressed(InputAction.CallbackContext context);
     }
 }
