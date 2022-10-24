@@ -53,6 +53,24 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseGuard"",
+                    ""type"": ""Button"",
+                    ""id"": ""75ab6fcd-e54c-48ae-99b5-4ea4edd98ce3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FarGuard"",
+                    ""type"": ""Button"",
+                    ""id"": ""97fc6964-7e14-4f7f-a86e-1042f01248b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +106,28 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""action"": ""Suppressed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26c9aa0d-9965-4179-8c21-888fa8382775"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseGuard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b27126a3-dd31-44cc-aa15-c908bc16ede5"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FarGuard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -116,6 +156,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         m_SquadController_Move = m_SquadController.FindAction("Move", throwIfNotFound: true);
         m_SquadController_Retreat = m_SquadController.FindAction("Retreat", throwIfNotFound: true);
         m_SquadController_Suppressed = m_SquadController.FindAction("Suppressed", throwIfNotFound: true);
+        m_SquadController_CloseGuard = m_SquadController.FindAction("CloseGuard", throwIfNotFound: true);
+        m_SquadController_FarGuard = m_SquadController.FindAction("FarGuard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -178,6 +220,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_SquadController_Move;
     private readonly InputAction m_SquadController_Retreat;
     private readonly InputAction m_SquadController_Suppressed;
+    private readonly InputAction m_SquadController_CloseGuard;
+    private readonly InputAction m_SquadController_FarGuard;
     public struct SquadControllerActions
     {
         private @SquadInput m_Wrapper;
@@ -185,6 +229,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_SquadController_Move;
         public InputAction @Retreat => m_Wrapper.m_SquadController_Retreat;
         public InputAction @Suppressed => m_Wrapper.m_SquadController_Suppressed;
+        public InputAction @CloseGuard => m_Wrapper.m_SquadController_CloseGuard;
+        public InputAction @FarGuard => m_Wrapper.m_SquadController_FarGuard;
         public InputActionMap Get() { return m_Wrapper.m_SquadController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -203,6 +249,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @Suppressed.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
                 @Suppressed.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
                 @Suppressed.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnSuppressed;
+                @CloseGuard.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCloseGuard;
+                @CloseGuard.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCloseGuard;
+                @CloseGuard.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCloseGuard;
+                @FarGuard.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
+                @FarGuard.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
+                @FarGuard.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
             }
             m_Wrapper.m_SquadControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -216,6 +268,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @Suppressed.started += instance.OnSuppressed;
                 @Suppressed.performed += instance.OnSuppressed;
                 @Suppressed.canceled += instance.OnSuppressed;
+                @CloseGuard.started += instance.OnCloseGuard;
+                @CloseGuard.performed += instance.OnCloseGuard;
+                @CloseGuard.canceled += instance.OnCloseGuard;
+                @FarGuard.started += instance.OnFarGuard;
+                @FarGuard.performed += instance.OnFarGuard;
+                @FarGuard.canceled += instance.OnFarGuard;
             }
         }
     }
@@ -234,5 +292,7 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRetreat(InputAction.CallbackContext context);
         void OnSuppressed(InputAction.CallbackContext context);
+        void OnCloseGuard(InputAction.CallbackContext context);
+        void OnFarGuard(InputAction.CallbackContext context);
     }
 }

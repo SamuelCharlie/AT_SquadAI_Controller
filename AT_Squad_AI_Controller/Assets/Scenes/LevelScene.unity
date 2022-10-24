@@ -244,16 +244,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150396013}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -52, y: 10.77, z: 2}
+  m_LocalPosition: {x: -37.03, y: 10.77, z: 6.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 963194228}
   - {fileID: 1441362160}
   - {fileID: 1145611675}
   - {fileID: 814615877}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &150396016
 MonoBehaviour:
@@ -1225,13 +1224,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3535534, y: 0.61237246, z: -0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: -17.05, y: 23.67, z: 15.9}
+  m_LocalRotation: {x: -0, y: 0.8660254, z: -0.5, w: 0}
+  m_LocalPosition: {x: -39.88, y: 36.78, z: 23.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 150396014}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 60, y: 90, z: 0}
 --- !u!1 &980040283
 GameObject:
@@ -1451,7 +1450,7 @@ Transform:
   - {fileID: 250273336}
   - {fileID: 1594747366}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1076071154
 PrefabInstance:
@@ -1707,8 +1706,12 @@ MonoBehaviour:
   mtc_y: {fileID: 2054546274}
   nav_agent: {fileID: 1145611679}
   squad_leader: {fileID: 1441362160}
-  soldier: {fileID: 0}
-  offset: {x: -1, y: 1, z: -1}
+  soldier: {fileID: 1145611675}
+  sq_member_one: 1
+  sq_member_two: 0
+  cls_guard: 0
+  far_guard: 0
+  offset: {x: -1, y: 1, z: 2}
 --- !u!4 &1297775281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 381f2680f281e244eb33ca1608e0a5f1, type: 3}
@@ -1851,6 +1854,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   retreat: {fileID: 1441721500}
   suppressed: {fileID: 1441721501}
+  follow_leader_sq_one: {fileID: 1145611680}
+  follow_leader_sq_two: {fileID: 1709615068}
   rb: {fileID: 1441721497}
   nav_agent: {fileID: 1441721491}
   player_cam: {fileID: 963194227}
@@ -2162,13 +2167,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6d30d1370d92c4ab8e9eee9f513b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squad_controller: {fileID: 0}
+  squad_controller: {fileID: 1441721493}
   mtc: {fileID: 1758207477}
   mtc_y: {fileID: 2054546274}
   nav_agent: {fileID: 1709615067}
   squad_leader: {fileID: 1441362160}
-  soldier: {fileID: 0}
-  offset: {x: 1.5, y: 2, z: -1}
+  soldier: {fileID: 814615877}
+  sq_member_one: 0
+  sq_member_two: 1
+  cls_guard: 0
+  far_guard: 0
+  offset: {x: -2, y: 2, z: -2}
 --- !u!1 &1758207472 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 86f783457a9659e41a99dc3147fefdba, type: 3}

@@ -17,10 +17,15 @@ public class Follow_Leader : MonoBehaviour
     public Transform squad_leader;
     public Transform soldier;
 
-    //public bool in_cover_x = false;
+    public bool sq_member_one = false;
+    public bool sq_member_two = false;
+    public bool cls_guard = false;
+    public bool far_guard = false;
 
     public Vector3 offset = new Vector3(0, 0, 0);
     private Vector3 starting_offset;
+
+    private float default_speed = 0.0f;
 
     private void Start()
     {
@@ -51,21 +56,53 @@ public class Follow_Leader : MonoBehaviour
         {
             Debug.Log("In cover x");
 
-            if (offset.x >= 1)
+            if (offset.z >= 2)
             {
                 Debug.Log("Moving to Cover");
                 offset = new Vector3(3, 0, 0);
             }
             
-            if (offset.x <= 1)
+            if (offset.z <= -2)
             {
                 Debug.Log("Moving to Cover");
                 offset = new Vector3(-3, 0, 0);
             }
         }
+        else if (cls_guard)
+        {
+            GuardClose();
+        }
+        else if (far_guard)
+        {
+            GuardFar();
+        }
         else
         {
             offset = starting_offset;
+        }
+    }
+
+    public void GuardClose()
+    {
+        if (sq_member_one)
+        {
+            offset = new Vector3(-1, 2, 1/2);
+        }
+        else if (sq_member_two)
+        {
+            offset = new Vector3(-1, 2, 1 / 2);
+        }
+    }
+
+    public void GuardFar()
+    {
+        if (sq_member_one)
+        {
+            offset = new Vector3(-3, 2, 2);
+        }
+        else if (sq_member_two)
+        {
+            offset = new Vector3(-3, 2, -2);
         }
     }
 }

@@ -10,6 +10,8 @@ public class Squad_Controller : MonoBehaviour
     SquadInput squad_input;
     public Retreat retreat;
     public Suppressed suppressed;
+    public Follow_Leader follow_leader_sq_one;
+    public Follow_Leader follow_leader_sq_two;
 
     private CharacterController squad_controller;
     private Animator animator;
@@ -38,6 +40,8 @@ public class Squad_Controller : MonoBehaviour
         squad_input.SquadController.Move.started += DoMove;
         squad_input.SquadController.Retreat.started += DoRetreat;
         squad_input.SquadController.Suppressed.started += Suppressed;
+        squad_input.SquadController.CloseGuard.started += DoCloseGuard;
+        squad_input.SquadController.FarGuard.started += DoFarGuard;
     }
 
     private void OnDisable()
@@ -46,6 +50,8 @@ public class Squad_Controller : MonoBehaviour
         squad_input.SquadController.Move.started -= DoMove;
         squad_input.SquadController.Retreat.started -= DoRetreat;
         squad_input.SquadController.Suppressed.started -= Suppressed;
+        squad_input.SquadController.CloseGuard.started -= DoCloseGuard;
+        squad_input.SquadController.FarGuard.started -= DoFarGuard;
     }
 
     void Update()
@@ -95,5 +101,17 @@ public class Squad_Controller : MonoBehaviour
     private void Suppressed(InputAction.CallbackContext obj)
     {
         suppressed.is_suppressed = !suppressed.is_suppressed;
+    }
+
+    private void DoCloseGuard(InputAction.CallbackContext obj)
+    {
+        follow_leader_sq_one.cls_guard = !follow_leader_sq_one.cls_guard;
+        follow_leader_sq_two.cls_guard = !follow_leader_sq_two.cls_guard;
+    }
+
+    private void DoFarGuard(InputAction.CallbackContext obj)
+    {
+        follow_leader_sq_one.far_guard = !follow_leader_sq_one.far_guard;
+        follow_leader_sq_two.far_guard = !follow_leader_sq_two.far_guard;
     }
 }
