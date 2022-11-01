@@ -19,22 +19,32 @@ public class Follow_Leader : MonoBehaviour
 
     public bool sq_member_one = false;
     public bool sq_member_two = false;
+    public bool sq_sprinting = false;
     public bool cls_guard = false;
     public bool far_guard = false;
 
     public Vector3 offset = new Vector3(0, 0, 0);
     private Vector3 starting_offset;
 
-    private float default_speed = 0.0f;
+    private float sq_default_speed = 0.0f;
 
     private void Start()
     {
         starting_offset = offset;
+        sq_default_speed = nav_agent.speed;
     }
 
     void Update()
     {
         nav_agent.SetDestination(squad_leader.position + offset);
+        if (sq_sprinting)
+        {
+            IsSprinting();
+        }
+        else if (!sq_sprinting)
+        {
+            nav_agent.speed = sq_default_speed;
+        }
 
         if (mtc_y.in_cover_y)
         {
@@ -104,5 +114,10 @@ public class Follow_Leader : MonoBehaviour
         {
             offset = new Vector3(-3, 2, -2);
         }
+    }
+
+    public void IsSprinting()
+    {
+        nav_agent.speed = 8;
     }
 }

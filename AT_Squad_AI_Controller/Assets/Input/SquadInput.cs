@@ -71,6 +71,24 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DoubleMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""a504270d-56f3-4c3d-a66d-62dc6bdbd30b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CombatState"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c54a6a3-84e8-4a96-9142-756b204e58fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -128,6 +146,28 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                     ""action"": ""FarGuard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec838a11-49f1-405c-9354-28b0c611108d"",
+                    ""path"": ""<Mouse>/backButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""DoubleMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4072bf3-d7b3-4e6d-afc2-6ff10ec4936c"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CombatState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -158,6 +198,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         m_SquadController_Suppressed = m_SquadController.FindAction("Suppressed", throwIfNotFound: true);
         m_SquadController_CloseGuard = m_SquadController.FindAction("CloseGuard", throwIfNotFound: true);
         m_SquadController_FarGuard = m_SquadController.FindAction("FarGuard", throwIfNotFound: true);
+        m_SquadController_DoubleMove = m_SquadController.FindAction("DoubleMove", throwIfNotFound: true);
+        m_SquadController_CombatState = m_SquadController.FindAction("CombatState", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -222,6 +264,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_SquadController_Suppressed;
     private readonly InputAction m_SquadController_CloseGuard;
     private readonly InputAction m_SquadController_FarGuard;
+    private readonly InputAction m_SquadController_DoubleMove;
+    private readonly InputAction m_SquadController_CombatState;
     public struct SquadControllerActions
     {
         private @SquadInput m_Wrapper;
@@ -231,6 +275,8 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         public InputAction @Suppressed => m_Wrapper.m_SquadController_Suppressed;
         public InputAction @CloseGuard => m_Wrapper.m_SquadController_CloseGuard;
         public InputAction @FarGuard => m_Wrapper.m_SquadController_FarGuard;
+        public InputAction @DoubleMove => m_Wrapper.m_SquadController_DoubleMove;
+        public InputAction @CombatState => m_Wrapper.m_SquadController_CombatState;
         public InputActionMap Get() { return m_Wrapper.m_SquadController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,6 +301,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @FarGuard.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
                 @FarGuard.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
                 @FarGuard.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnFarGuard;
+                @DoubleMove.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnDoubleMove;
+                @DoubleMove.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnDoubleMove;
+                @DoubleMove.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnDoubleMove;
+                @CombatState.started -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCombatState;
+                @CombatState.performed -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCombatState;
+                @CombatState.canceled -= m_Wrapper.m_SquadControllerActionsCallbackInterface.OnCombatState;
             }
             m_Wrapper.m_SquadControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +326,12 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
                 @FarGuard.started += instance.OnFarGuard;
                 @FarGuard.performed += instance.OnFarGuard;
                 @FarGuard.canceled += instance.OnFarGuard;
+                @DoubleMove.started += instance.OnDoubleMove;
+                @DoubleMove.performed += instance.OnDoubleMove;
+                @DoubleMove.canceled += instance.OnDoubleMove;
+                @CombatState.started += instance.OnCombatState;
+                @CombatState.performed += instance.OnCombatState;
+                @CombatState.canceled += instance.OnCombatState;
             }
         }
     }
@@ -294,5 +352,7 @@ public partial class @SquadInput : IInputActionCollection2, IDisposable
         void OnSuppressed(InputAction.CallbackContext context);
         void OnCloseGuard(InputAction.CallbackContext context);
         void OnFarGuard(InputAction.CallbackContext context);
+        void OnDoubleMove(InputAction.CallbackContext context);
+        void OnCombatState(InputAction.CallbackContext context);
     }
 }
