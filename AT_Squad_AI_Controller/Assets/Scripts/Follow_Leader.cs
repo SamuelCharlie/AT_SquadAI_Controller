@@ -66,13 +66,13 @@ public class Follow_Leader : MonoBehaviour
         {
             Debug.Log("In cover x");
 
-            if (offset.z >= 2)
+            if (offset.y == 2)
             {
                 Debug.Log("Moving to Cover");
                 offset = new Vector3(3, 0, 0);
             }
             
-            if (offset.z <= -2)
+            if (offset.y == 1)
             {
                 Debug.Log("Moving to Cover");
                 offset = new Vector3(-3, 0, 0);
